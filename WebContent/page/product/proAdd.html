@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>文章列表--layui后台管理模板 2.0</title>
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="format-detection" content="telephone=no">
+<link rel="stylesheet" href="../../layui/css/layui.css" media="all" />
+<script src="../../layui/layui.js" charset="utf-8"></script>
+<link rel="stylesheet" href="../../css/public.css" media="all" />
+<script type="text/javascript" src="../../js/jquery-2.1.0.js"></script>
+<style type="text/css">
+#detailImgs img {
+	width: 200px;
+	height: 200px;
+	border: 1px solid #eeeeee;
+	margin-right: 10px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+</style>
+</head>
+<body class="childrenBody">
+	<form class="layui-form" style="width: 80%;">
+		<div class="layui-form-item layui-row layui-col-xs12">
+			<label class="layui-form-label">商品名称</label>
+			<div class="layui-input-block">
+				<input type="text" class="layui-input proName" lay-verify="required"
+					id="name" placeholder="请输入商品名称">
+			</div>
+		</div>
+		<div class="layui-form-item layui-row layui-col-xs12">
+			<label class="layui-form-label">价格</label>
+			<div class="layui-input-block">
+				<input type="text" class="layui-input proName" lay-verify="required"
+					id="price" placeholder="请输入价格">
+			</div>
+		</div>
+		<div class="layui-form-item layui-row layui-col-xs12">
+			<label class="layui-form-label">市场价格</label>
+			<div class="layui-input-block">
+				<input type="text" class="layui-input proName" lay-verify="required"
+					id="market_price" placeholder="请输入市场价格">
+			</div>
+		</div>
+		<div class="layui-form-item layui-row layui-col-xs12">
+			<label class="layui-form-label">成本价格</label>
+			<div class="layui-input-block">
+				<input type="text" class="layui-input proName" lay-verify="required"
+					id="cost_price" placeholder="请输入成本价格">
+			</div>
+		</div>
+		<div class="layui-form-item layui-row layui-col-xs12">
+			<label class="layui-form-label">进货总量</label>
+			<div class="layui-input-block">
+				<input type="text" class="layui-input proName" lay-verify="required"
+					id="purchase_quantity" placeholder="请输入进货总量">
+			</div>
+		</div>
+		<div class="layui-row">
+			<div class="magb15 layui-col-md4 layui-col-xs12">
+				<label class="layui-form-label">状态</label>
+				<div class="layui-input-block">
+					<select name="proGrade" class="proGrade" lay-filter="proGrade"
+						id="status">
+						<option value="上架">上架</option>
+						<option value="下架">下架</option>
+					</select>
+				</div>
+			</div>
+			<div class="magb15 layui-col-md4 layui-col-xs12">
+				<label class="layui-form-label">选购热点</label>
+				<div class="layui-input-block">
+					<select name="proGrade" class="proGrade" lay-filter="proGrade"
+						id="hotSpots">
+						<option value="家用">家用</option>
+						<option value="商用">商用</option>
+						<option value="送朋友">送朋友</option>
+						<option value="送家人">送家人</option>
+						<option value="其它">其它</option>
+					</select>
+				</div>
+			</div>
+			<!-- <div class="magb15 layui-col-md4 layui-col-xs12">
+				<label class="layui-form-label">功能</label>
+				<div class="layui-input-block">
+					<select name="proGrade" class="proGrade" lay-filter="proGrade"
+						id="func">
+						<option value="遥控">遥控</option>
+						<option value="定时">定时</option>
+						<option value="倾倒断电">倾倒断电</option>
+						<option value="恒温">恒温</option>
+						<option value="浴居两用">浴居两用</option>
+						<option value="加湿">加湿</option>
+						<option value="防水">防水</option>
+						<option value="其它">其它</option>
+					</select>
+				</div>
+			</div> -->
+		</div>
+		<div class="layui-form-item layui-row layui-col-xs12">
+			<label class="layui-form-label">功能</label>
+			<div class="layui-input-block">
+				<input type="text" class="layui-input proName" lay-verify="required" id="func"
+					placeholder="请输入品牌">
+			</div>
+		</div>
+		<div class="layui-form-item layui-row layui-col-xs12">
+			<label class="layui-form-label">品牌</label>
+			<div class="layui-input-block">
+				<input type="text" class="layui-input proName" lay-verify="required"
+					id="brand" placeholder="请输入品牌">
+			</div>
+		</div>
+		<div class="layui-form-item layui-row layui-col-xs12">
+			<label class="layui-form-label">商品封面图</label>
+			<div class="layui-input-block">
+				<div class="layui-upload">
+					<button type="button" class="layui-btn" id="test1">上传图片</button>
+					<div style="margin-top: 10px; position: relative;">
+						<img alt="暂无图片" src="" id="titleImg"
+							style="width: 200px; height: 200px; border: 1px solid #eeeeee; position: relative;" />
+						<!-- <button type="button" class="layui-btn delTitleImg" style="opacity: .8;display:none;position: relative;margin-left: -49px;margin-top: -162px;width: 44px;border-radius: 5px;">
+				  		<i class="layui-icon" style="margin-left: -5px;"></i>
+				  	</button> -->
+					</div>
+				</div>
+				<!-- <input type="text" class="layui-input proName" lay-verify="required"
+					placeholder="请输入品牌"> -->
+				<!-- <img alt="暂无图片" src="" id="titleImg" style="width:200px;height: 200px;border:1px solid #eeeeee;"/> -->
+			</div>
+		</div>
+		<div class="layui-form-item layui-row layui-col-xs12">
+			<label class="layui-form-label">商品详情图</label>
+			<div class="layui-input-block">
+				<div class="layui-upload">
+					<button type="button" class="layui-btn" id="test2">图片上传</button>
+					<div style="margin-top: 10px;" id="detailImgs">
+						<!-- <img alt="暂无图片" src="" id="titleImg" style="width:200px;height: 200px;border:1px solid #eeeeee;"/> -->
+					</div>
+				</div>
+				<!-- <input type="text" class="layui-input proName" lay-verify="required"
+					placeholder="请输入品牌"> -->
+				<!-- <img alt="暂无图片" src=""/> -->
+			</div>
+		</div>
+		<div class="layui-form-item layui-row layui-col-xs12">
+			<label class="layui-form-label">商品描述</label>
+			<div class="layui-input-block">
+				<textarea placeholder="请输入商品描述" class="layui-textarea proDesc"
+					id="content"></textarea>
+			</div>
+		</div>
+		<div class="layui-form-item layui-row layui-col-xs12">
+			<div class="layui-input-block">
+				<button class="layui-btn layui-btn-sm" lay-submit=""
+					lay-filter="addpro">提交</button>
+				<button type="reset"
+					class="layui-btn layui-btn-sm layui-btn-primary">取消</button>
+			</div>
+		</div>
+	</form>
+	<!-- <script type="text/javascript" src="../../layui/layui.js"></script> -->
+	<script type="text/javascript" src="proAdd.js"></script>
+	<script type="text/javascript" language="javascript">
+		 function uuid() {
+		 	return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+		 		var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+		 		return v.toString(16);
+		 	});
+		 }
+		 var u = uuid();
+		 //alert(u);
+		//删除图片
+		 $(document).on("click", "#delTitleImg0", function(){
+			 $(".detailsImgsDivVar0").remove();
+		 });
+		 $(document).on("click", "#delTitleImg1", function(){
+			 $(".detailsImgsDivVar1").remove();
+		 });
+		 $(document).on("click", "#delTitleImg2", function(){
+			 $(".detailsImgsDivVar2").remove();
+		 });
+		 $(document).on("click", "#delTitleImg3", function(){
+			 $(".detailsImgsDivVar3").remove();
+		 });
+		 $(document).on("click", "#delTitleImg4", function(){
+			 $(".detailsImgsDivVar4").remove();
+		 });
+		 $(document).on("click", "#delTitleImg5", function(){
+			 $(".detailsImgsDivVar5").remove();
+		 });
+		 $(document).on("click", "#delTitleImg6", function(){
+			 $(".detailsImgsDivVar6").remove();
+		 });
+		function createTime(v) {
+			var date = new Date(v);
+			var y = date.getFullYear();
+			var m = date.getMonth() + 1;
+			m = m < 10 ? '0' + m : m;
+			var d = date.getDate();
+			d = d < 10 ? ("0" + d) : d;
+			var h = date.getHours();
+			h = h < 10 ? ("0" + h) : h;
+			var M = date.getMinutes();
+			M = M < 10 ? ("0" + M) : M;
+			var str = y + "-" + m + "-" + d + " " + h + ":" + M;
+			return str;
+		}
+		function GetQueryStrings(name) {
+			var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+			var r = window.location.search.substr(1).match(reg);
+			if (r != null)
+				return unescape(r[2]);
+			return null;
+		}
+		//UUID
+		/* function uuid() {
+		 return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+		 var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+		 return v.toString(16);
+		 });
+		 } */
+		//商品详情图---->上传图片
+		var num = 0;
+		var interlocutionImgIndex = 0;
+		/* $(function() {
+			$("div").delegate("#0", "click", function() {
+				alert($(this).attr("alt"));
+			});
+			$("div").delegate("#1", "click", function() {
+				alert($(this).attr("alt"));
+			});
+			$("div").delegate("#2", "click", function() {
+				alert($(this).attr("alt"));
+			});
+		}); */
+		//上传限制操作
+		var num = 0;
+		function getGoodsLevel(){
+			$.ajax({
+		        url : "/HouseElectricShopManage/ajaxLogin.action",
+		        type : "post",
+		        async : false,
+		        success : function(data){
+		        	if(data.goodsLevel == "1"){
+		        		num = 3;
+			        	return num;
+		        	}else if(data.goodsLevel == "2"){
+		        		num = 5;
+		        		return num;
+		        	}
+			    }
+		    })
+		}
+		getGoodsLevel();
+		layui.use('upload',
+						function() {
+							var imgNames = new Array();
+							var imgName;
+							//上传限制操作
+							var imgNums = 0;
+							imgNums = num;
+							var $ = layui.jquery, upload = layui.upload;
+							//多图片上传
+							upload
+									.render({
+										elem : '#test2',
+										auto : true //选择文件后不自动上传
+										,
+										url : '/HouseElectricShopManage/file/fileup.action?productId='
+												+ u
+												+ '&imgType=' + 0,
+										multiple : true,
+										number : imgNums,
+										async : true,
+										before : function(obj) {
+											//预读本地文件示例，不支持ie8
+											obj.preview(function(index,file, result) {
+												imgName = num++;
+												//$('#detailImgs').append('<img id="'+imgName+'" src="' + result +'" alt="' + file.name +'" class="layui-upload-img">');
+												var detailsImgsDivVar = "detailsImgsDivVar" + imgName; 
+												var detailsImgsDiv = "<div class='"+detailsImgsDivVar+"' style='float:left;position:relative;width:200px;height:200px;margin-right:10px;'></div>";
+												var imgdetails = "imgdetails" + imgName;
+												var delTitleImg = "delTitleImg" + imgName;
+												//var detailImgSrc = "http://localhost:8080/HouseElectricShopManage/productImgs/" + file.name;
+												//var _img = "<img alt='暂无图片' id="+imgdetails+" src="+detailImgSrc+" style='position:relative;width:100%;height:100%;'>";
+
+												var appendBtn = "<button type='button' class='layui-btn' id='"+delTitleImg+"' style='opacity: .8;display: block;position: relative;margin-left: 157.3px;margin-top: -207px;width: 44px;border-radius: 5px;'><i class='layui-icon' style='margin-left: -5px;'></i></button>";
+
+												$("#detailImgs").append(detailsImgsDiv);
+												$("."+detailsImgsDivVar).append('<img id="'+imgName+'" src="' + result +'" alt="' + file.name +'" class="layui-upload-img">');
+												$("."+detailsImgsDivVar).append(appendBtn);
+											});
+										},
+										done : function(res) {
+											if (res.count >= 3) {
+												var delImg = "#" + imgName;
+												$(delImg).remove();
+												alert("上传数量上限，上传更多请联系管理员");
+											}
+											//console.log(res);
+											//console.log(JSON.stringify(res));
+											//console.log("imgNames:" + imgNames);
+											//刷新页面
+											//window.location.reload();
+											//上传完毕
+										}
+									});
+							//封面图上传
+							upload.render({
+										elem : '#test1',
+										auto : true //选择文件后不自动上传
+										,
+										url : '/HouseElectricShopManage/file/fileupOne.action?product_id=' + u + '&imgType=' + 1,
+										multiple : true,
+										number : 1,
+										async : true,
+										before : function(obj) {
+											//预读本地文件示例，不支持ie8
+											obj.preview(function(index, file,
+													result) {
+												//$('#detailImgs').append('<img id="'+(num++)+'" src="' + result +'" alt="' + file.name +'" class="layui-upload-img">');
+												$("#titleImg").attr("src",result);
+												//imgNames.push(_uuid + file.name);
+											});
+										},
+										done : function(res) {
+											//var imgSrc = "http://localhost:8080/HouseElectricShopManage/productImgs/" + res.data[0];
+
+											//var _img = "<img alt="+ res.data[0] +" id="+(num++)+" src="+imgSrc+">";
+											//$('#detailImgs').append('<img id="'+(num++)+'" src="'+ imgSrc +'" alt="'+ res.data[0] +'">');
+											//$('#detailImgs').append(_img);
+											console.log(res);
+											console.log(JSON.stringify(res));
+											console.log("imgNames:" + imgNames);
+											//上传完毕
+										}
+									});
+						});
+	</script>
+</body>
+</html>

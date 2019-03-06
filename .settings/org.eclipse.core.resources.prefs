@@ -1,0 +1,12 @@
+eclipse.preferences.version=1
+encoding//WebContent/js=UTF-8
+encoding//WebContent/json=UTF-8
+encoding//WebContent/json/navs.json=UTF-8
+encoding//WebContent/page=UTF-8
+encoding//WebContent/page/product=UTF-8
+encoding//WebContent/page/user=UTF-8
+encoding//src/com/oaec/Controller/OrderController.java=UTF-8
+encoding//src/com/oaec/Controller/SCaptchaController.java=GBK
+encoding//src/com/oaec/Util/Query.java=UTF-8
+encoding//src/com/oaec/Util/R.java=UTF-8
+encoding/src=GBK

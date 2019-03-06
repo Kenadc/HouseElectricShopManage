@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oaec.Mapper.ProductPhotosMapper">
+	<insert id="InsertUpFile" parameterType="ProductPhotos">
+		insert into product_photo(
+		`id`,
+		`product_id`,
+		`name`,
+		`imageUrl`,
+		`intro`,
+		`imgType`,
+		`createTime`
+		)
+		values(
+		#{id},
+		#{product_id},
+		#{name},
+		#{imageUrl},
+		#{intro},
+		#{imgType},
+		#{createTime}
+		)
+	</insert>
+	<delete id="deleteByImgNameAndProductId" parameterType="productPhotos">
+		delete from product_photo where imageUrl LIKE '%' #{imageUrl} '%' and product_id=#{product_id} and imgType = #{imgType}
+	</delete>
+	<delete id="deleteByProductId" parameterType="java.lang.String">
+		delete from product_photo where product_id=#{product_id}
+	</delete>
+	<select id="findByProductId" parameterType="productPhotos" resultType="ProductPhotos">
+		select * from product_photo 
+			<where>
+			<if test="product_id != null">
+				and product_id=#{product_id}
+			</if>
+			<if test="imgType != null">
+				and imgType=#{imgType}
+			</if>
+		</where>
+	</select>
+	<select id="findByProductIdCount" parameterType="productPhotos" resultType="int">
+		select count(*) from product_photo 
+			<where>
+			<if test="product_id != null">
+				and product_id=#{product_id}
+			</if>
+			<if test="imgType != null">
+				and imgType=#{imgType}
+			</if>
+		</where>
+	</select>
+	<select id="findListByProductId" parameterType="java.lang.String" resultType="ProductPhotos">
+		select * from product_photo where product_id=#{product_id}
+	</select>
+	<update id="updateByProductId" parameterType="productPhotos">
+	    update product_photo set imageUrl=#{imageUrl},createTime=#{createTime} where product_id=#{product_id} and imgType=#{imgType}
+	</update>
+	<update id="setProductIdByNullProductId" parameterType="java.lang.String">
+	    update product_photo set product_id = #{product_id} where product_id='null' or product_id='test'
+	</update>
+	<!--  <select id="findByOne" parameterType="user" resultType="User">
+		select * from userinfo
+		<where>
+			<if test="nickName != null">
+				and nickName=#{nickName}
+			</if>
+			<if test="password != null">
+				and password=#{password}
+			</if>
+		</where>
+	</select>
+	<select id="findByNickName" parameterType="user" resultType="int">
+		select count(*) from userinfo
+		<where>
+			<if test="nickName != null">
+				and nickName=#{nickName}
+			</if>
+		</where>
+	</select>
+	<select id="findByNickNameObj" parameterType="user" resultType="User">
+		select * from userinfo
+		<where>
+			<if test="nickName != null">
+				and nickName=#{nickName}
+			</if>
+		</where>
+	</select>
+	<select id="findList" resultType="User">
+		select * from userinfo
+	</select> -->
+</mapper>

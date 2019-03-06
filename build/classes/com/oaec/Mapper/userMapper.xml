@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oaec.Mapper.userMapper">
+	<insert id="insert" parameterType="User">
+		insert into userinfo(
+		`id`,
+		`nickName`,
+		`password`,
+		`sex`,
+		`userType`,
+		`birthday`,
+		`idCard`,
+		`realName`,
+		`constellaId`,
+		`liveAddress`,
+		`homeAddress`,
+		`headUrl`,
+		`hobbyId`,
+		`tel`,
+		`email`,
+		`reserveResult`,
+		`userStatus`,
+		`goodsLevel`,
+		`goodsStatus`
+		)
+		values(
+		#{id},
+		#{nickName},
+		#{password},
+		#{sex},
+		#{userType},
+		#{birthday},
+		#{idCard},
+		#{realName},
+		#{constellaId},
+		#{liveAddress},
+		#{homeAddress},
+		#{headUrl},
+		#{hobbyId},
+		#{tel},
+		#{email},
+		#{reserveResult},
+		#{userStatus},
+		#{goodsLevel},
+		#{goodsStatus}
+		)
+	</insert>
+	<update id="update" parameterType="user">
+	    update userinfo
+	    <set>
+	      <if test="nickName != null">
+	        nickName = #{nickName},
+	      </if>
+	      <if test="password != null">
+	        password = #{password},
+	      </if>
+	      <if test="sex != null">
+	        sex = #{sex},
+	      </if>
+	      <if test="userType != null">
+	        userType = #{userType},
+	      </if>
+	      <if test="birthday != null">
+	        birthday = #{birthday},
+	      </if>
+	      <if test="idCard != null">
+	        idCard = #{idCard},
+	      </if>
+	      <if test="realName != null">
+	        realName = #{realName},
+	      </if>
+	      <if test="constellaId != null">
+	        constellaId = #{constellaId},
+	      </if>
+	      <if test="liveAddress != null">
+	        liveAddress = #{liveAddress},
+	      </if>
+	      <if test="homeAddress != null">
+	        homeAddress = #{homeAddress},
+	      </if>
+	      <if test="headUrl != null">
+	        headUrl = #{headUrl},
+	      </if>
+	      <if test="hobbyId != null">
+	        hobbyId = #{hobbyId},
+	      </if>
+	      <if test="tel != null">
+	        tel = #{tel},
+	      </if>
+	      <if test="email != null">
+	        email = #{email},
+	      </if>
+	      <if test="reserveType != null">
+	        reserveType = #{reserveType},
+	      </if>
+	      <if test="reserveResult != null">
+	        reserveResult = #{reserveResult},
+	      </if>
+	      <if test="userStatus != null">
+	        userStatus = #{userStatus},
+	      </if>
+	      <if test="goodsLevel != null">
+	        goodsLevel = #{goodsLevel},
+	      </if>
+	      <if test="goodsStatus != null">
+	        goodsStatus = #{goodsStatus},
+	      </if>
+	    </set>
+	    where id = #{id}
+	  </update>
+	  <update id="updateGoodsLevelById" parameterType="user">
+	    update userinfo set goodsLevel=#{goodsLevel},goodsStatus=#{goodsStatus} where id = #{id}
+	  </update>
+	  <update id="updateReserveTypeById" parameterType="user">
+	    update userinfo set reserveType=#{reserveType} where id = #{id}
+	  </update>
+	  <update id="updateReserveResultById" parameterType="user">
+	    update userinfo set reserveResult=#{reserveResult},userType=#{userType} where id = #{id}
+	  </update>
+	  <update id="updateUserStatusById" parameterType="user">
+	    update userinfo set userStatus=#{userStatus} where id = #{id}
+	  </update>
+	<select id="findByOne" parameterType="user" resultType="User">
+		select * from userinfo
+			where
+				nickName = #{nickName} and password = #{password} and userType != #{userType} and userStatus = #{userStatus}
+	</select>
+	<select id="findListByGoodsStatus" resultType="map">
+		select t.* from userinfo t where t.goodsStatus != #{goodsStatus}
+			order by t.id desc
+			<if test="offset != null and limit != null">
+				 limit #{offset},#{limit}
+			</if>
+	</select>
+	<select id="findCountByGoodsStatus" resultType="int" parameterType="user">
+		select count(*) from userinfo where goodsStatus=#{goodsStatus} and userType=#{userType}
+	</select>
+	<select id="findUserInfoPage" resultType="map">
+		select t.* from userinfo t 
+		<where>
+			<if test="nickName != null and nickName != ''">
+			 	and (t.nickName like concat('%',#{nickName},'%') or t.nickName like concat('%',#{nickName},'%'))
+			</if>
+			<if test="realName != null and realName != ''">
+			 	and t.realName =#{realName}
+			</if>
+			<if test="tel != null and tel != ''">
+			 	and t.tel=#{tel}
+			</if>
+			<if test="idCard != null and idCard != ''">
+			 	and t.idCard = #{idCard,jdbcType=VARCHAR}
+			</if>
+		</where>
+		order by t.id desc
+		<if test="offset != null and limit != null">
+			 limit #{offset},#{limit}
+		</if>
+	</select>
+	<select id="findReserveUserInfoPageCount" resultType="int" parameterType="user">
+		select count(*) from userinfo where reserveResult=#{reserveResult} and userType = #{userType}
+	</select>
+	<select id="findReserveUserInfoPage" resultType="map">
+		select t.* from userinfo t
+		<where>
+			<if test="userType != null and userType != ''">
+			 	and t.userType =#{userType}
+			</if>
+			<if test="reserveResult != null and reserveResult != ''">
+			 	and t.reserveResult=#{reserveResult}
+			</if>
+		</where>
+		order by t.id desc
+		<if test="offset != null and limit != null">
+			 limit #{offset},#{limit}
+		</if>
+	</select>
+	<select id="findByNickName" parameterType="user" resultType="int">
+		select count(*) from userinfo
+		<where>
+			<if test="nickName != null">
+				and nickName=#{nickName}
+			</if>
+		</where>
+	</select>
+	<select id="findByNickNameObj" parameterType="user" resultType="User">
+		select * from userinfo
+		<where>
+			<if test="nickName != null">
+				and nickName=#{nickName}
+			</if>
+		</where>
+	</select>
+	<select id="findList" resultType="User">
+		select * from userinfo
+	</select>
+</mapper>

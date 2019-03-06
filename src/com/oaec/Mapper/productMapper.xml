@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oaec.Mapper.productMapper">
+	<insert id="insert" parameterType="Product">
+		insert into product(
+		`id`,
+		`name`,
+		`price`,
+		`market_price`,
+		`cost_price`,
+		`integral`,
+		`status`,
+		`createTime`,
+		`brand`,
+		`category_id`,
+		`type_id`,
+		`marque`,
+		`func`,
+		`hotSpots`,
+		`kitApp`,
+		`user_id`,
+		`content`,
+		`productStatus`
+		)
+		values(
+		#{id},
+		#{name},
+		#{price},
+		#{market_price},
+		#{cost_price},
+		#{integral},
+		#{status},
+		#{createTime},
+		#{brand},
+		#{category_id},
+		#{type_id},
+		#{marque},
+		#{func},
+		#{hotSpots},
+		#{kitApp},
+		#{user_id},
+		#{content},
+		#{productStatus}
+		)
+	</insert>
+	<select id="findById" parameterType="product" resultType="Product">
+		select * from product where id=#{id}
+	</select>
+	<select id="list" parameterType="product" resultType="Product">
+		select * from product
+		<where>
+			<if test="name != null">
+				and name LIKE '%' #{name} '%'
+			</if>
+			<if test="brand != null">
+				and brand LIKE '%' #{brand} '%'
+			</if>
+			<if test="func != null">
+				and func LIKE '%' #{func} '%'
+			</if>
+			<if test="hotSpots != null">
+				and hotSpots LIKE '%' #{hotSpots} '%'
+			</if>
+			<if test="kitApp != null">
+				and kitApp=#{kitApp}
+			</if>
+			<if test="status != null">
+				and status=#{status}
+			</if>
+		</where>
+	</select>
+	<select id="findProductInfoPageCount" resultType="java.lang.Integer">
+		select count(*) from product where  user_id = #{user_id}
+	</select>
+	<select id="findProductInfoPage" resultType="map">
+		select t.* from product t 
+		<where>
+			<if test="name != null and name != ''">
+			 	and (t.name like concat('%',#{name},'%') or t.name like concat('%',#{name},'%'))
+			</if>
+			<if test="brand != null and brand != ''">
+			 	and t.brand =#{brand}
+			</if>
+			<if test="func != null and func != ''">
+			 	and t.func=#{func}
+			</if>
+			<if test="kitApp != null and kitApp != ''">
+			 	and t.kitApp = #{kitApp}
+			</if>
+		</where>
+		order by t.createTime desc
+		<if test="offset != null and limit != null">
+			 limit #{offset},#{limit}
+		</if>
+	</select>
+	<update id="updateStatus" parameterType="product">
+	    update product set status=#{status} where id = #{id}
+	</update>
+	<update id="updateProStatusById" parameterType="product">
+	    update product set productStatus=#{productStatus} where id = #{id}
+	  </update>
+	  <update id="updateAllById" parameterType="product">
+	    update product
+	    <set>
+	      <if test="name != null">
+	        name = #{name},
+	      </if>
+	      <if test="price != null">
+	        price = #{price},
+	      </if>
+	      <if test="market_price != null">
+	        market_price = #{market_price},
+	      </if>
+	      <if test="cost_price != null">
+	        cost_price = #{cost_price},
+	      </if>
+	      <if test="integral != null">
+	        integral = #{integral},
+	      </if>
+	      <if test="status != null">
+	        status = #{status},
+	      </if>
+	      <if test="createTime != null">
+	        createTime = #{createTime},
+	      </if>
+	      <if test="brand != null">
+	        brand = #{brand},
+	      </if>
+	      <if test="category_id != null">
+	        category_id = #{category_id},
+	      </if>
+	      <if test="type_id != null">
+	        type_id = #{type_id},
+	      </if>
+	      <if test="marque != null">
+	        marque = #{marque},
+	      </if>
+	      <if test="func != null">
+	        func = #{func},
+	      </if>
+	      <if test="hotSpots != null">
+	        hotSpots = #{hotSpots},
+	      </if>
+	      <if test="kitApp != null">
+	        kitApp = #{kitApp},
+	      </if>
+	      <if test="content != null">
+	        content = #{content},
+	      </if>
+	    </set>
+	    where id = #{id}
+	  </update>
+	  <delete id="deleteById" parameterType="java.lang.String">
+	  	delete from product where id = #{id}
+	  </delete>
+</mapper>

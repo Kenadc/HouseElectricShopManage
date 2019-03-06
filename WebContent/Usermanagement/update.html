@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>layui</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="../layui/css/layui.css" media="all"/>
+   <script type="text/javascript" src="../../../page/office_hall_front/js/sweet/sweet-alert.min.js"></script>
+	<link rel="stylesheet" href="../../../page/office_hall_front/css/sweet/sweet-alert.css">
+  <script src="//res.layui.com/layui/dist/layui.js" charset="utf-8"></script>
+	<script type="text/javascript" src="../js/jquery.min.js"></script>
+	<script type="text/javascript" src="../layui/layui.js"></script>
+	<script type="text/javascript" src="../../Registered/js/md5.js"></script>
+	<script type="text/javascript" src="/js/common.js"></script>
+	<script>
+	$(function(){
+		     var params={};
+		     params.id=getQueryString("uid");
+			 $.ajax({
+				url: "/userInfo/queryById",
+				data:params,
+				type : "post",
+				async : true,
+				success : function(data) {
+					$("#username").val(""+data.data.username+"");
+					$("#name").val(""+data.data.name+"");
+					$("#Idcard").val(""+data.data.idcard+"");
+					$("#phone").val(""+data.data.phone+"");
+					$("#email").val(""+data.data.email+"");
+					$("#Detailedaddress").val(""+data.data.detailedaddress+"");
+					$("#departmentid").val(""+data.data.departmentid+"");
+				},
+			});
+			 var dag= window.parent;
+			 dag.update=function(){
+				var params ={};
+					params.uid=getQueryString("uid");
+					params.username=$("#username").val();
+					params.password=$("#password").val();
+					params.name=$("#name").val();
+					params.Idcard=$("#Idcard").val();
+					params.phone=$("#phone").val();
+					params.email=$("#email").val();
+					params.Detailedaddress=$("#Detailedaddress").val();
+					params.departmentid=$("#departmentid").val();
+					 $.ajax({
+						url: "/userInfo/update",
+						data:params,
+						type : "get",
+						async : true,
+						success : function(data) {
+							if(data>0)
+								{
+						    	  swal({
+							            title: "编辑成功！",
+							            showCancelButton: true,
+							            confirmButtonColor: "#AEDEF4",
+							            confirmButtonText: "确定",
+							            closeOnConfirm: false
+								        }, function() {
+								        	window.close();
+									    	  parent.location.reload();
+								        });
+								}
+						},
+						error : function(data) {
+							swal("编辑失败！");
+						}
+					});
+			}
+	});
+</script>
+</head>
+<body>   
+<div style="height:20px;"></div>    
+  <div class="layui-form-item">
+    <label class="layui-form-label">用户名</label>
+    <div class="layui-input-block">
+     <input type="hidden" id="departmentid"/>
+      <input type="text" name="username" id="username" lay-verify="title" autocomplete="off" placeholder="请输入用户名" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">密码</label>
+    <div class="layui-input-block">
+      <input type="password" id="password" name="password" placeholder="请输入密码" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">真实姓名</label>
+    <div class="layui-input-block">
+      <input type="text" name="name" id="name" lay-verify="title" autocomplete="off" placeholder="请输入用户姓名" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">身份证号码</label>
+    <div class="layui-input-block">
+      <input type="text" id="Idcard" name="Idcard" lay-verify="title" autocomplete="off" placeholder="请输入身份证号码" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">手机号</label>
+    <div class="layui-input-block">
+      <input type="text" id="phone" name="phone" lay-verify="title" autocomplete="off" placeholder="请输入手机号" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">邮箱</label>
+    <div class="layui-input-block">
+      <input type="text" id="email" name="email" lay-verify="title" autocomplete="off" placeholder="请输入邮箱号" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item layui-form-text">
+    <label class="layui-form-label">具体住址</label>
+    <div class="layui-input-block">
+      <textarea placeholder="请输入具体入住址" id="Detailedaddress" class="layui-textarea" name="desc"></textarea>
+    </div>
+  </div> 
+
+
+</body>
+</html>

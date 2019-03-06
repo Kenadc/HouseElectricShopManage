@@ -1,0 +1,57 @@
+@charset "utf-8";
+/* CSS Document */
+
+body,ol,ul,h1,h2,h3,h4,h5,h6,p,th,td,dl,dd,form,fieldset,legend,input,button,textarea,select,label{margin:0;padding:0}
+body{font-family: 微软雅黑;}
+input,a,textarea,select{outline:none;}
+a{color:#2d374b;text-decoration:none}
+a:hover{text-decoration:none}
+em{font-style:normal}
+li{list-style:none;}
+img{border:0;vertical-align:middle;padding:0;margin:0;}
+td{border:0;}
+p{word-wrap:break-word;}
+.debug{border:solid 1px pink;}
+.debug1{border:solid 1px green;}
+.clear{clear:both;_overflow:hidden;}
+.h40{height:40px;}
+.h16{height:16px;}
+.h20{height:20px;}
+.h15{height:15px;}
+.h10{height:10px;}
+.h1{height:1px;}
+.h3{height:3px;}
+.h5{height:5px;}
+.h6{height:6px;}
+.h7{height:7px;}
+.h8{height:8px;}
+.w10{width:10px;}
+.w5{width:5px;}
+i{font-style:normal}
+.red{color:red;}
+/*鍙冲榻�*/
+
+.fl{float:left;}
+.unselect{-moz-user-select:-moz-none;-moz-user-select:none;-o-user-select:none;-khtml-user-select:none;-webkit-user-select:none;-ms-user-select:none;user-select:none;}
+.clearfix:after {content:".";display:block;height:0;clear:both;visibility:hidden;}
+*html .clearfix {height:1%;}
+*+html .clearfix {height:1%;}
+.hide{display:none;}
+
+.location{
+	background:url(../../images/local_icon2.png) no-repeat 25px center #fff;
+	color:#4097dd;
+	font-size:14px;
+	width:1200px;
+	margin:0 auto;
+	height:40px;
+	line-height:40px;
+	text-indent:45px;
+	
+}
+.location a{
+	color:#333;
+	font-size:14px;
+}
+
+

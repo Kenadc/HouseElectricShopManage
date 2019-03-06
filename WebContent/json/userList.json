@@ -1,0 +1,54 @@
+{
+  "code": 0,
+  "msg": "",
+  "count": 5,
+  "data": [
+   {
+    "usersId":"1",
+    "userName":"冯昌",
+    "userEmail":"fc@layui.com",
+    "userSex":"男",
+    "userStatus":"0",
+    "userGrade":"4",
+    "userEndTime":"2018-01-31 10:00",
+    "userDesc":"layuiCMS浣滆�咃紝鍘熷悕鈥樿鍙垜椹摜鈥�"
+},{
+      "usersId": "2",
+      "userName": "安坤",
+      "userEmail": "ankun@layui.com",
+      "userSex": "保密",
+      "userStatus": "0",
+      "userGrade": "3",
+      "userEndTime": "2018-01-14 15:35",
+      "userDesc" : "layui妗嗘灦浣滆�咃紝鎬у埆鑷充粖鏄釜璋溿�傘�傘��"
+    },
+    {
+      "usersId": "3",
+      "userName": "刘亚军",
+      "userEmail": "lyj@layui.com",
+      "userSex": "男",
+      "userStatus": "1",
+      "userGrade": "2",
+      "userEndTime": "2018-01-25 16:25",
+      "userDesc" : "fly绀惧尯绠＄悊鍛橈紝鎹紶涓巐ayui浣滆�呮湁濂告儏锛屾晠甯愬彿琚皝銆�"
+    }, {
+      "usersId": "4",
+      "userName": "冯仕江",
+      "userEmail": "lsj@layui.com",
+      "userSex": "男",
+      "userStatus": "1",
+      "userGrade": "2",
+      "userEndTime": "2018-01-25 16:25",
+      "userDesc" : "fly绀惧尯绠＄悊鍛橈紝鎹紶涓巐ayui浣滆�呮湁濂告儏锛屾晠甯愬彿琚皝銆�"
+    }, {
+      "usersId": "5",
+      "userName": "杨德协",
+      "userEmail": "ydx@layui.com",
+      "userSex": "男",
+      "userStatus": "1",
+      "userGrade": "2",
+      "userEndTime": "2018-01-25 16:25",
+      "userDesc" : "fly绀惧尯绠＄悊鍛橈紝鎹紶涓巐ayui浣滆�呮湁濂告儏锛屾晠甯愬彿琚皝銆�"
+    }
+  ]
+}
